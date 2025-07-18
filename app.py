@@ -1,6 +1,13 @@
 from flask import Flask, request, jsonify
 import joblib
 import numpy as np
+import os
+import urllib.request
+
+if not os.path.exists("model.pkl"):
+    url = "https://drive.google.com/file/d/1RiNpIGiIpA-QbL7tpwmYASyfyBZX8E_B/view?usp=sharing"
+    urllib.request.urlretrieve(url, "model.pkl")
+
 
 app = Flask(__name__)
 
