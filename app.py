@@ -5,7 +5,7 @@ import os
 import urllib.request
 
 if not os.path.exists("model.pkl"):
-    url = "https://drive.google.com/uc?export=download&id=1RiNpIGiIpA-QbL7tpwmYASyfyBZX8E_B"
+    url = "https://drive.google.com/uc?export=download&id=1miUawFu13A3UrNtLd3lP5IwPDSkGkENM"
     urllib.request.urlretrieve(url, "model.pkl")
 
 app = Flask(__name__)
