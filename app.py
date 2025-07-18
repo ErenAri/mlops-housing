@@ -4,12 +4,14 @@ import numpy as np
 import os
 import urllib.request
 
-if not os.path.exists("model.pkl"):
+model_path = "model.pkl"
+model = None
+
+if not os.path.exists(model_path):
     url = "https://drive.google.com/uc?export=download&id=1miUawFu13A3UrNtLd3lP5IwPDSkGkENM"
-    urllib.request.urlretrieve(url, "model.pkl")
+    urllib.request.urlretrieve(url, model_path)
 
 app = Flask(__name__)
-model = joblib.load("model.pkl")
 
 @app.route("/")
 def home():
@@ -17,6 +19,9 @@ def home():
 
 @app.route("/predict", methods=["POST"])
 def predict():
+    global model
+    if model is None:
+        model = joblib.load(model_path)
     data = request.get_json(force=True)
     input_data = np.array(data["features"]).reshape(1, -1)
     prediction = model.predict(input_data)
